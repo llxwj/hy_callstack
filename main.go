@@ -55,7 +55,6 @@ func readLine(path string) []Stack {
 }
 
 func main() {
-	
     if len(os.Args) < 3 {
         fmt.Println("Usage: elftest elf_file log_file")
         os.Exit(1)
@@ -77,7 +76,6 @@ func main() {
         os.Exit(1)
     }
 
-
     fmt.Printf("File Header: ")
     fmt.Println(_elf.FileHeader)
     fmt.Printf("ELF Class: %s\n", _elf.Class.String())
@@ -85,19 +83,10 @@ func main() {
     fmt.Printf("ELF Type: %s\n", _elf.Type)
     fmt.Printf("ELF Data: %s\n", _elf.Data)
     fmt.Printf("Entry Point: %d\n", _elf.Entry)
-    fmt.Printf("Section Addresses: %d\n", _elf.Sections)
-	
-	//fmt.Printf("Section Len = %d\n", len(_elf.Sections))
-	//for _, section := range(_elf.Sections) {
-	//	fmt.Printf("Section Name = %s\n", section.Name)
-	//}
 
 	for _, stack := range stacks {
 		symbols, _ := _elf.Symbols()
-	
 		for _, symbol := range(symbols) {
-			//fmt.Printf("Symbol name = %s, Value = 0x%X, Size = 0x%X\n", symbol.Name, symbol.Value, symbol.Size)
-			//fmt.Println(symbol)
 			if symbol.Value == uint64(stack.Fuction) {
 				fmt.Printf("Function name = %s\n", symbol.Name)
 			}
